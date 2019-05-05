@@ -36,6 +36,7 @@ public class DemoConfig extends JFinalConfig {
     public void configRoute(Routes routes) {
         //设置项目启动默认访问页，此不设置无需在web中设置了。不过好像web设置了访问页也无效照样报404 -.-
         routes.add("/", HelloController.class,"/WEB-INF/view/");
+        routes.add("/excel", ExcelController.class,"/template/excel");
         //
     }
 
@@ -46,27 +47,31 @@ public class DemoConfig extends JFinalConfig {
 
     @Override
     public void configPlugin(Plugins plugins) {
+       //DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("db.url"), PropKit.get("db.username"),
+       //        PropKit.get("db.password"), PropKit.get("db.driver"));
+
+
+       //plugins.add(druidPlugin);
+
+       //ActiveRecordPlugin activeRecordPlugin = new ActiveRecordPlugin(druidPlugin);
+       ////添加与表的映射关系
+       //activeRecordPlugin.addMapping("user", User.class);
+       //plugins.add(activeRecordPlugin);
+
+
         DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("db.url"), PropKit.get("db.username"),
-                PropKit.get("db.password"), PropKit.get("db.driver"));
+                PropKit.get("db.password"), PropKit.get("db.driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
+        druidPlugin.start();//2.启动连接池
+        ActiveRecordPlugin arp = new ActiveRecordPlugin("jfinal1",druidPlugin);//3.实例化连接
+        arp.start();//4.启动该连接
 
-        // StatFilter提供JDBC层的统计信息
-        druidPlugin.addFilter(new StatFilter());
-        // WallFilter的功能是防御SQL注入攻击
-        WallFilter wallFilter = new WallFilter();
-        wallFilter.setDbType(JdbcConstants.MYSQL);
 
-        druidPlugin.addFilter(wallFilter);
+        DruidPlugin druidPlugin2 = new DruidPlugin(PropKit.get("db.url2"), PropKit.get("db.username"),
+                PropKit.get("db.password"), PropKit.get("db.driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
+        druidPlugin2.start();//2.启动连接池
+        ActiveRecordPlugin arp2 = new ActiveRecordPlugin("jfinal2",druidPlugin2);//3.实例化连接
+        arp2.start();//4.启动该连接
 
-      /*  druidPlugin.setInitialSize(PropKit.getInt("db.poolInitialSize"));
-        druidPlugin.setMaxPoolPreparedStatementPerConnectionSize(PropKit.getInt("db.poolMaxSize"));
-        druidPlugin.setTimeBetweenConnectErrorMillis(PropKit.getInt("connectionTimeoutMillis"));*/
-
-        plugins.add(druidPlugin);
-
-        ActiveRecordPlugin activeRecordPlugin = new ActiveRecordPlugin(druidPlugin);
-        //添加与表的映射关系
-        activeRecordPlugin.addMapping("user", User.class);
-        plugins.add(activeRecordPlugin);
 
     }
 
