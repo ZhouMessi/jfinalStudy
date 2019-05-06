@@ -51,6 +51,34 @@ public class CustomExcelUtil<T> extends ExcelUtiles {
         return null;
     }
 
+    public static <T> List<T> readerAndReturnByFile(File file, ImportParams importParams, Class clazz){
+        // 数据处理
+        //IExcelDataHandler<User> handler = new UserExcelHandler();
+        //handler.setNeedHandlerFields(new String[] { "姓名" });// 注意这里对应的是excel的列名。也就是对象上指定的列名。
+        //importParams.setDataHanlder(handler);
+        // 需要验证
+        importParams.setNeedVerfiy(true);
+        try {
+            ExcelImportResult<T> result = ExcelImportUtil.importExcelMore(file, clazz,importParams);
+            List<T> successList = result.getList();
+            List<T> failList = result.getFailList();
+            System.out.println("是否存在验证未通过的数据:" + result.isVerfiyFail());
+            System.out.println("验证通过的数量:" + successList.size());
+            System.out.println("验证未通过的数量:" + failList.size());
+
+            return successList;
+
+
+        } catch (Exception e) {
+            System.out.println("导入数据异常请检查文件格式,或咨询开发人员");
+        }
+        return null;
+    }
+
+
+
+
+
     /**
      * 导出对应的excel并制定导出的文件名
      * @param list
@@ -91,22 +119,22 @@ public class CustomExcelUtil<T> extends ExcelUtiles {
         CustomExcels customExcels=new CustomExcels();
 
         //读取支付宝异常订单
-        customExcels.setAliPayExceptionOrderList(readerAndReturnByAP(path,customImportParamList.getAliPayExceptionOrderIP(), AliPayExceptionOrder.class));
+        customExcels.setAliPayExceptionOrderList(CustomExcelUtil.<AliPayExceptionOrder>readerAndReturnByAP(path,customImportParamList.getAliPayExceptionOrderIP(), AliPayExceptionOrder.class));
 
         //读取汇聚付款测试
-        customExcels.setConvergeGatheringTestList(readerAndReturnByAP(path,customImportParamList.getConvergeGatheringTestIP(), ConvergeGatheringTest.class));
+        customExcels.setConvergeGatheringTestList(CustomExcelUtil.<ConvergeGatheringTest>readerAndReturnByAP(path,customImportParamList.getConvergeGatheringTestIP(), ConvergeGatheringTest.class));
 
         //读取汇聚异常订单
-        customExcels.setConvergeExceptionOrderList(readerAndReturnByAP(path,customImportParamList.getConvergeExceptionOrderIP(), ConvergeExceptionOrder.class));
+        customExcels.setConvergeExceptionOrderList(CustomExcelUtil.<ConvergeExceptionOrder>readerAndReturnByAP(path,customImportParamList.getConvergeExceptionOrderIP(), ConvergeExceptionOrder.class));
 
         //读取汇聚付款测试
-        customExcels.setConvergeRefundTestList(readerAndReturnByAP(path,customImportParamList.getConvergeRefundTestIP(), ConvergeRefundTest.class));
+        customExcels.setConvergeRefundTestList(CustomExcelUtil.<ConvergeRefundTest>readerAndReturnByAP(path,customImportParamList.getConvergeRefundTestIP(), ConvergeRefundTest.class));
 
         //读取支付宝退款测试
-        customExcels.setAliPayRefundTestList(readerAndReturnByAP(path,customImportParamList.getAliPayRefundTestIP(), AliPayRefundTest.class));
+        customExcels.setAliPayRefundTestList(CustomExcelUtil.<AliPayRefundTest>readerAndReturnByAP(path,customImportParamList.getAliPayRefundTestIP(), AliPayRefundTest.class));
 
         //读取支付宝在线测试
-        customExcels.setAliPayOnLineTestList(readerAndReturnByAP(path,customImportParamList.getAliPayOnLineTestIP(), AliPayOnLineTest.class));
+        customExcels.setAliPayOnLineTestList(CustomExcelUtil.<AliPayOnLineTest>readerAndReturnByAP(path,customImportParamList.getAliPayOnLineTestIP(), AliPayOnLineTest.class));
 
         return customExcels;
     }

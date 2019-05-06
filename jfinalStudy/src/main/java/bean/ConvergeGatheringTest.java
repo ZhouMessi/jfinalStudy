@@ -47,11 +47,19 @@ public class ConvergeGatheringTest {
     @Excel(name = "产品名称")
     private String productName;
 
-    @Excel(name = "数据库中是否存在")
-    private String isExist;
+    @Excel(name = "150")
+    private Double environment150;
 
-    @Excel(name = "和之前的数据是否相同")
-    private String isEqual;
+    @Excel(name = "140")
+    private Double environment140;
+
+    @Excel(name = "142")
+    private Double environment142;
+
+    @Excel(name = "143")
+    private Double environment143;
+
+
 
     public String getMerchantNo() {
         return merchantNo;
@@ -149,19 +157,35 @@ public class ConvergeGatheringTest {
         this.productName = productName;
     }
 
-    public String getIsExist() {
-        return isExist;
+    public Double getEnvironment150() {
+        return environment150;
     }
 
-    public void setIsExist(String isExist) {
-        this.isExist = isExist;
+    public void setEnvironment150(Double environment150) {
+        this.environment150 = environment150;
     }
 
-    public String getIsEqual() {
-        return isEqual;
+    public Double getEnvironment140() {
+        return environment140;
     }
 
-    public void setIsEqual(String isEqual) {
-        this.isEqual = isEqual;
+    public void setEnvironment140(Double environment140) {
+        this.environment140 = environment140;
+    }
+
+    public Double getEnvironment142() {
+        return environment142;
+    }
+
+    public void setEnvironment142(Double environment142) {
+        this.environment142 = environment142;
+    }
+
+    public Double getEnvironment143() {
+        return environment143;
+    }
+
+    public void setEnvironment143(Double environment143) {
+        this.environment143 = environment143;
     }
 }
