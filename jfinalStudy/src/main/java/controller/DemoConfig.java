@@ -18,7 +18,7 @@ public class DemoConfig extends JFinalConfig {
         PropKit.use("config.properties");
 
         constants.setBaseUploadPath("shangchuan");
-        constants.setMaxPostSize(30*1024*1024);
+        constants.setMaxPostSize(30*1000*1000);
 
      //  JFinal3BeetlRenderFactory rf=new JFinal3BeetlRenderFactory();
      //  rf.config();
@@ -69,7 +69,7 @@ public class DemoConfig extends JFinalConfig {
         DruidPlugin druidPlugin2 = new DruidPlugin(PropKit.get("jdbcUrl142"), PropKit.get("username"),
                 PropKit.get("password"), PropKit.get("driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
         druidPlugin2.start();//2.启动连接池
-        ActiveRecordPlugin arp2 = new ActiveRecordPlugin("142",druidPlugin);//3.实例化连接
+        ActiveRecordPlugin arp2 = new ActiveRecordPlugin("142",druidPlugin2);//3.实例化连接
         arp2.start();//4.启动该连接
         arp2.addMapping("t_trade", "no", Trade.class);
 
@@ -77,7 +77,7 @@ public class DemoConfig extends JFinalConfig {
         DruidPlugin druidPlugin3 = new DruidPlugin(PropKit.get("jdbcUrl143"), PropKit.get("username"),
                 PropKit.get("password"), PropKit.get("driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
         druidPlugin3.start();//2.启动连接池
-        ActiveRecordPlugin arp3 = new ActiveRecordPlugin("143",druidPlugin);//3.实例化连接
+        ActiveRecordPlugin arp3 = new ActiveRecordPlugin("143",druidPlugin3);//3.实例化连接
         arp3.start();//4.启动该连接
         arp3.addMapping("t_trade", "no", Trade.class);
 
@@ -85,7 +85,7 @@ public class DemoConfig extends JFinalConfig {
         DruidPlugin druidPlugin4 = new DruidPlugin(PropKit.get("jdbcUrl150"), PropKit.get("username"),
                 PropKit.get("password"), PropKit.get("driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
         druidPlugin4.start();//2.启动连接池
-        ActiveRecordPlugin arp4 = new ActiveRecordPlugin("150",druidPlugin);//3.实例化连接
+        ActiveRecordPlugin arp4 = new ActiveRecordPlugin("150",druidPlugin4);//3.实例化连接
         arp4.start();//4.启动该连接
         arp4.addMapping("t_trade", "no", Trade.class);
 
