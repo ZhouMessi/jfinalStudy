@@ -1,17 +1,13 @@
 package controller;
 
-import bean.User;
-import com.alibaba.druid.filter.stat.StatFilter;
-import com.alibaba.druid.util.JdbcConstants;
-import com.alibaba.druid.wall.WallFilter;
+import bean.Trade;
 import com.jfinal.config.*;
 import com.jfinal.core.JFinal;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
-import org.beetl.core.GroupTemplate;
-import org.beetl.ext.jfinal3.JFinal3BeetlRenderFactory;
+
 
 
 public class DemoConfig extends JFinalConfig {
@@ -21,11 +17,14 @@ public class DemoConfig extends JFinalConfig {
         //读取文件
         PropKit.use("config.properties");
 
-        JFinal3BeetlRenderFactory rf=new JFinal3BeetlRenderFactory();
-        rf.config();
-        constants.setRenderFactory(rf);
+        constants.setBaseUploadPath("shangchuan");
+        constants.setMaxPostSize(30*1024*1024);
 
-        GroupTemplate gt=rf.groupTemplate;
+     //  JFinal3BeetlRenderFactory rf=new JFinal3BeetlRenderFactory();
+     //  rf.config();
+     //  constants.setRenderFactory(rf);
+
+     //  GroupTemplate gt=rf.groupTemplate;
 
         //根据gt可以添加扩展函数，格式化函数，共享变量等
 
@@ -36,7 +35,7 @@ public class DemoConfig extends JFinalConfig {
     public void configRoute(Routes routes) {
         //设置项目启动默认访问页，此不设置无需在web中设置了。不过好像web设置了访问页也无效照样报404 -.-
         routes.add("/", HelloController.class,"/WEB-INF/view/");
-        routes.add("/excel", ExcelController.class,"/template/excel");
+        routes.add("/excel", ExcelController.class,"/WEB-INF/view/");
         //
     }
 
@@ -58,20 +57,37 @@ public class DemoConfig extends JFinalConfig {
        //activeRecordPlugin.addMapping("user", User.class);
        //plugins.add(activeRecordPlugin);
 
-
-        DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("db.url"), PropKit.get("db.username"),
-                PropKit.get("db.password"), PropKit.get("db.driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
+        //140环境数据源
+        DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbcUrl140"), PropKit.get("username"),
+                PropKit.get("password"), PropKit.get("driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
         druidPlugin.start();//2.启动连接池
-        ActiveRecordPlugin arp = new ActiveRecordPlugin("jfinal1",druidPlugin);//3.实例化连接
+        ActiveRecordPlugin arp = new ActiveRecordPlugin("140",druidPlugin);//3.实例化连接
         arp.start();//4.启动该连接
+        arp.addMapping("t_trade", "no", Trade.class);
 
-
-        DruidPlugin druidPlugin2 = new DruidPlugin(PropKit.get("db.url2"), PropKit.get("db.username"),
-                PropKit.get("db.password"), PropKit.get("db.driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
+        //142环境数据源
+        DruidPlugin druidPlugin2 = new DruidPlugin(PropKit.get("jdbcUrl142"), PropKit.get("username"),
+                PropKit.get("password"), PropKit.get("driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
         druidPlugin2.start();//2.启动连接池
-        ActiveRecordPlugin arp2 = new ActiveRecordPlugin("jfinal2",druidPlugin2);//3.实例化连接
+        ActiveRecordPlugin arp2 = new ActiveRecordPlugin("142",druidPlugin);//3.实例化连接
         arp2.start();//4.启动该连接
+        arp2.addMapping("t_trade", "no", Trade.class);
 
+        //143环境数据源
+        DruidPlugin druidPlugin3 = new DruidPlugin(PropKit.get("jdbcUrl143"), PropKit.get("username"),
+                PropKit.get("password"), PropKit.get("driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
+        druidPlugin3.start();//2.启动连接池
+        ActiveRecordPlugin arp3 = new ActiveRecordPlugin("143",druidPlugin);//3.实例化连接
+        arp3.start();//4.启动该连接
+        arp3.addMapping("t_trade", "no", Trade.class);
+
+        //150数据源
+        DruidPlugin druidPlugin4 = new DruidPlugin(PropKit.get("jdbcUrl150"), PropKit.get("username"),
+                PropKit.get("password"), PropKit.get("driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
+        druidPlugin4.start();//2.启动连接池
+        ActiveRecordPlugin arp4 = new ActiveRecordPlugin("150",druidPlugin);//3.实例化连接
+        arp4.start();//4.启动该连接
+        arp4.addMapping("t_trade", "no", Trade.class);
 
     }
 

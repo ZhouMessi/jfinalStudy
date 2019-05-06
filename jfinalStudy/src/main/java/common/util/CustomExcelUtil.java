@@ -57,7 +57,7 @@ public class CustomExcelUtil<T> extends ExcelUtiles {
         //handler.setNeedHandlerFields(new String[] { "姓名" });// 注意这里对应的是excel的列名。也就是对象上指定的列名。
         //importParams.setDataHanlder(handler);
         // 需要验证
-        importParams.setNeedVerfiy(true);
+       // importParams.setNeedVerfiy(true);
         try {
             ExcelImportResult<T> result = ExcelImportUtil.importExcelMore(file, clazz,importParams);
             List<T> successList = result.getList();

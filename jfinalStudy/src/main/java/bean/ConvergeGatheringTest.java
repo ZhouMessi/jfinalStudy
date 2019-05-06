@@ -2,6 +2,7 @@ package bean;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -48,16 +49,16 @@ public class ConvergeGatheringTest {
     private String productName;
 
     @Excel(name = "150")
-    private Double environment150;
+    private BigDecimal environment150;
 
     @Excel(name = "140")
-    private Double environment140;
+    private BigDecimal environment140;
 
     @Excel(name = "142")
-    private Double environment142;
+    private BigDecimal environment142;
 
     @Excel(name = "143")
-    private Double environment143;
+    private BigDecimal environment143;
 
 
 
@@ -157,35 +158,35 @@ public class ConvergeGatheringTest {
         this.productName = productName;
     }
 
-    public Double getEnvironment150() {
+    public BigDecimal getEnvironment150() {
         return environment150;
     }
 
-    public void setEnvironment150(Double environment150) {
+    public void setEnvironment150(BigDecimal environment150) {
         this.environment150 = environment150;
     }
 
-    public Double getEnvironment140() {
+    public BigDecimal getEnvironment140() {
         return environment140;
     }
 
-    public void setEnvironment140(Double environment140) {
+    public void setEnvironment140(BigDecimal environment140) {
         this.environment140 = environment140;
     }
 
-    public Double getEnvironment142() {
+    public BigDecimal getEnvironment142() {
         return environment142;
     }
 
-    public void setEnvironment142(Double environment142) {
+    public void setEnvironment142(BigDecimal environment142) {
         this.environment142 = environment142;
     }
 
-    public Double getEnvironment143() {
+    public BigDecimal getEnvironment143() {
         return environment143;
     }
 
-    public void setEnvironment143(Double environment143) {
+    public void setEnvironment143(BigDecimal environment143) {
         this.environment143 = environment143;
     }
 }
