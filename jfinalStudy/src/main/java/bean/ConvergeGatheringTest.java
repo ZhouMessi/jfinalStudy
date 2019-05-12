@@ -54,6 +54,9 @@ public class ConvergeGatheringTest {
     @Excel(name = "140")
     private BigDecimal environment140;
 
+    @Excel(name = "141")
+    private BigDecimal environment141;
+
     @Excel(name = "142")
     private BigDecimal environment142;
 
@@ -188,5 +191,13 @@ public class ConvergeGatheringTest {
 
     public void setEnvironment143(BigDecimal environment143) {
         this.environment143 = environment143;
+    }
+
+    public BigDecimal getEnvironment141() {
+        return environment141;
+    }
+
+    public void setEnvironment141(BigDecimal environment141) {
+        this.environment141 = environment141;
     }
 }

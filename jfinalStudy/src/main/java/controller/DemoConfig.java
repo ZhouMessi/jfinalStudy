@@ -87,7 +87,16 @@ public class DemoConfig extends JFinalConfig {
         druidPlugin4.start();//2.启动连接池
         ActiveRecordPlugin arp4 = new ActiveRecordPlugin("150",druidPlugin4);//3.实例化连接
         arp4.start();//4.启动该连接
-        arp4.addMapping("t_trade", "no", Trade.class);
+
+
+
+        //141数据源
+        DruidPlugin druidPlugin5 = new DruidPlugin(PropKit.get("jdbcUrl141"), PropKit.get("username"),
+                PropKit.get("password"), PropKit.get("driver"));//定义mysql连接数据库信息,并实例化新的数据库连接池
+        druidPlugin5.start();//2.启动连接池
+        ActiveRecordPlugin arp5 = new ActiveRecordPlugin("141",druidPlugin5);//3.实例化连接
+        arp5.start();//4.启动该连接
+        arp5.addMapping("t_trade", "no", Trade.class);
 
     }
 

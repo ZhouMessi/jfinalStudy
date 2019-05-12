@@ -99,6 +99,11 @@ public class HelloController extends Controller {
                     convergeGatheringTest.setEnvironment150(o4);
                 }
 
+                BigDecimal o5 = Db.use("141").queryColumn(sql,  merchantOrderNum.replace("\t",""));
+                if(StringUtil.notNull(o5)){
+                    convergeGatheringTest.setEnvironment141(o5);
+                }
+
 
                 System.out.println("这是第"+count+"个");
                 count++;
